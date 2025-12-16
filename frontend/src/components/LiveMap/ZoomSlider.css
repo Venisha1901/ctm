@@ -1,0 +1,46 @@
+/* Zoom Slider Styles */
+.zoom-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00d9ff;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.8), 0 0 4px rgba(0, 217, 255, 1);
+  transition: all 0.2s ease;
+}
+
+.zoom-slider::-webkit-slider-thumb:hover {
+  background: #33e6ff;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 1), 0 0 8px rgba(51, 230, 255, 1);
+  transform: scale(1.1);
+}
+
+.zoom-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00d9ff;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.8), 0 0 4px rgba(0, 217, 255, 1);
+  transition: all 0.2s ease;
+}
+
+.zoom-slider::-moz-range-thumb:hover {
+  background: #33e6ff;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 1), 0 0 8px rgba(51, 230, 255, 1);
+  transform: scale(1.1);
+}
+
+/* Additional browser compatibility */
+.zoom-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+}
+
+.zoom-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>CTM Socket Test</title></head>
+  <body>
+    <h2>CTM Socket Test</h2>
+    <pre id="out"></pre>
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script>
+      const out = document.getElementById('out');
+      const socket = io('http://localhost:5000');
+
+      socket.on('connect', () => {
+        out.textContent += 'connected as ' + socket.id + '\n';
+      });
+
+      socket.on('snapshot', (rows) => {
+        out.textContent += 'snapshot received: ' + rows.length + ' rows\n';
+        console.log('snapshot', rows);
+      });
+
+      socket.on('attack', (data) => {
+        out.textContent += 'attack event: ' + JSON.stringify(data) + '\n';
+      });
+
+      socket.on('stats_update', (d)=> {
+        out.textContent += 'stats_update: ' + JSON.stringify(d) + '\n';
+      });
+    </script>
+  </body>
+</html>

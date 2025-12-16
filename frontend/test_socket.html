@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>CTM Socket Test</title></head>
+<body>
+  <h1>CTM Socket Test</h1>
+  <pre id="log"></pre>
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script>
+  const log = (m) => { 
+    const p = document.getElementById('log'); 
+    p.textContent += m + "\n"; 
+    console.log(m); 
+  };
+
+  const socket = io("http://localhost:5000", { transports: ['websocket'] });
+
+  socket.on('connect', () => log('connected as ' + socket.id));
+  socket.on('snapshot', s => log('snapshot received: ' + s.length + ' rows'));
+  socket.on('attack', a => log('attack event: ' + JSON.stringify(a)));
+  socket.on('disconnect', (reason) => log('disconnect: ' + reason));
+  socket.on('connect_error', (err) => log('connect_error: ' + err));
+</script>
+</body>
+</html>

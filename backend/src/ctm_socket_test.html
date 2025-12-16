@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>CTM Socket.IO Test</title></head>
+<body>
+  <h3>CTM Socket.IO Test</h3>
+  <pre id="log"></pre>
+
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+  <script>
+    const log = (msg) => {
+      document.getElementById('log').textContent += msg + "\n";
+      console.log(msg);
+    };
+
+    // Connect to socket.io server (adjust port if needed)
+    const socket = io('http://localhost:5000');
+
+    socket.on('connect', () => log('connected as ' + socket.id));
+    socket.on('disconnect', () => log('disconnected'));
+
+    // Snapshot event (your server emits this on connect)
+    socket.on('snapshot', (data) => {
+      log('snapshot received, len=' + (data && data.length));
+      console.log(data);
+    });
+
+    // New attack event
+    socket.on('attack', (attack) => {
+      log('attack event: ' + JSON.stringify({
+        id: attack.id,
+        src: attack.src_ip,
+        dst: attack.dst_ip,
+        type: attack.attack_type,
+        severity: attack.severity
+      }));
+    });
+
+    // Stats update
+    socket.on('stats_update', (s) => log('stats_update: ' + JSON.stringify(s)));
+  </script>
+</body>
+</html>
